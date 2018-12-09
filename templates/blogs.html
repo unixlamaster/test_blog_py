@@ -7,7 +7,9 @@
  ============================-->
    <div class="h-100 order-section justify-content-center align-items-center">
      <div class="container h-100">
-                <h3>{{ bloglist }}</h3>
+       {% for blog_name in bloglist %}
+          {{ blog_name }} blog <a href=#>подписаться</a><br>
+       {% endfor %}
 	 </div>
    </div>
  </section><!-- #blogList -->

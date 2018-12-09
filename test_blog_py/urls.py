@@ -21,5 +21,7 @@ from blogs import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blogs/', views.index),
+    path('login/', views.LoginFormView.as_view()),
+    path('logout/', views.LogoutView.as_view()),
     path('', RedirectView.as_view(url='/blogs/', permanent=True)),
 ] 

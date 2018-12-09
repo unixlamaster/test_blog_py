@@ -21,4 +21,31 @@ class Migration(migrations.Migration):
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
+        migrations.CreateModel(
+            name='Post',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('header', models.CharField(max_length=50)),
+                ('text', models.CharField(max_length=2048)),
+                ('create_date', models.DateTimeField(auto_now=True)),
+                ('blog', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='blogs.Blog')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+            ],
+        ),   
+        migrations.CreateModel(
+            name='ReadPost',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('post', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='posts.Post')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Subscription',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('blog', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='blogs.Blog')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+            ],
+        ),     
     ]

@@ -11,7 +11,22 @@
     <title>{% block title %}Главная{% endblock %}</title>
   </head>
   <body>
-    {% block body %}{% endblock %}
+    {% if user.is_authenticated %}
+    <li class="menu-has-children"><a href=/accounts/email/>{{ user.username }}</a>
+      <ul>
+          <li><a href=/logout>Выход</a></li>
+      </ul>
+    </li>
+      {% block body %}{% endblock %}
+    {% else %}
+      <form action="" method="post">
+        {% csrf_token %}
+        <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+        {{ form.as_p }}
+        <button type="submit">login</button>
+      </form>	 
+    {% endif %}
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
