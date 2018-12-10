@@ -7,14 +7,19 @@
  ============================-->
    <div class="h-100 order-section justify-content-center align-items-center">
      <div class="container h-100">
+     Список блогов
+        <ul class="list-group">
        {% for blog in bloglist %}
+          <li class="list-group-item">
           {{ blog.name }} blog 
 		    {% if blog.id in subscriptions %}
 			   <a href=/unsubscribe/?blog={{ blog.id }} >отписаться</a><br>
 			{% else %}
 				<a href=/subscribe/?blog={{ blog.id }} >подписаться</a><br>
 			{% endif %}
+           </li>
        {% endfor %}
+       </ul>
 	 </div>
    </div>
  </section><!-- #blogList -->

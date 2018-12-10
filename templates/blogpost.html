@@ -1,0 +1,36 @@
+{% extends "main.html" %}
+{% block title %} {{ title }} {% endblock %}
+{% block body %}
+ <section id="blogpost">
+ <!--==========================
+   BlogPost list Section
+ ============================-->
+   <div class="h-100 order-section justify-content-center align-items-center">
+     <div class="container h-100">
+     Лента новостей
+        <div class="list-group">
+        {% for bp in blogpost %}
+		    {% if bp.id in readpost %}
+                <div class="list-group-item list-group-item-action flex-column align-items-start">
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ bp.header }}</h5>
+                    <small>{{ bp.date }}</small>
+                  </div>
+                  <p class="mb-1">{{ bp.text }}</p>
+                  <small>{{ bp.blogname }}</small>
+                </div>
+			{% else %}
+				<a href=/readpost/?post={{ bp.id }} class="list-group-item list-group-item-action flex-column align-items-start active" >
+                  <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{ bp.header }}</h5>
+                    <small>{{ bp.date }}</small>
+                  </div>
+                  <p class="mb-1">{{ bp.text }}</p>
+                  <small>{{ bp.blogname }}</small>
+                </a>
+			{% endif %}
+       {% endfor %}
+	 </div>
+   </div>
+ </section><!-- #blogPost List -->
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "main.html" %}
+{% block title %} {{ title }} {% endblock %}
+{% block body %}
+ <section id="post">
+
+   <div class="h-100 order-section justify-content-center align-items-center">
+     <div class="container h-100">
+        Добавляем новое сообщение в свой блог
+      <form action="" method="post">
+        {% csrf_token %}
+        <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+         <div class="form-group">
+            <label for="input_header">Заголовок</label>
+            <input type=text name=header class="form-control" id="input_header">
+            <label for="input_text">Текст сообщение</label>
+            <textarea class="form-control" id="input_text" rows="3" name=text></textarea>
+          </div>
+        <button type="submit">submit</button>
+      </form>	 
+	 </div>
+   </div>
+ </section>
+{% endblock %}
