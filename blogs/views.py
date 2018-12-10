@@ -19,24 +19,28 @@ def index(request):
         template = loader.get_template('blogs.html')
         context = {
             'title': "Blogs",
-            'bloglist': [blog.user.username for blog in Blog.objects.all()],
-         }
+            'bloglist': [{'id':b.id, 'name':b.user.username} for b in Blog.objects.all()],
+			'subscriptions': [s.id for s in Subscription.objects.filter(user=request.user.id)]
+        }
+        return HttpResponse(template.render(context, request))
     else:
-        # Do something for anonymous users.
-        context = {
-            'title': "Login",
-         }
-        template = loader.get_template('login.html')
-    return HttpResponse(template.render(context, request))
+        return HttpResponseRedirect("/login")
 
+def subscribe(request):
+    Subscription.objects.create(blog_id=request.GET['blog'],user=request.user)
+    return HttpResponseRedirect("/blogs")
+	
+def unsubscribe(request):
+    Subscription.objects.filter(blog_id=request.GET['blog'],user=request.user).delete()
+    return HttpResponseRedirect("/blogs")
+
+    
 class LoginFormView(FormView):
     form_class = AuthenticationForm
-
-    # Аналогично регистрации, только используем шаблон аутентификации.
-    template_name = "login.html"
+    template_name = "main.html"
 
     # В случае успеха перенаправим на главную.
-    success_url = "/"
+    success_url = "/blogs"
 
     def form_valid(self, form):
         # Получаем объект пользователя на основе введённых в форму данных.

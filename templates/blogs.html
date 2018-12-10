@@ -7,8 +7,13 @@
  ============================-->
    <div class="h-100 order-section justify-content-center align-items-center">
      <div class="container h-100">
-       {% for blog_name in bloglist %}
-          {{ blog_name }} blog <a href=#>подписаться</a><br>
+       {% for blog in bloglist %}
+          {{ blog.name }} blog 
+		    {% if blog.id in subscriptions %}
+			   <a href=/unsubscribe/?blog={{ blog.id }} >отписаться</a><br>
+			{% else %}
+				<a href=/subscribe/?blog={{ blog.id }} >подписаться</a><br>
+			{% endif %}
        {% endfor %}
 	 </div>
    </div>
